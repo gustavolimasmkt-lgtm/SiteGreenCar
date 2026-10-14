@@ -71,8 +71,7 @@ ${noindex}
 ${ogImage ? `<meta property="og:image" content="${esc(ogImage)}">` : ''}
 ${canonical ? `<link rel="canonical" href="${esc(canonical)}">` : ''}
 <meta name="theme-color" content="#ffffff">
-<link rel="preload" href="/static/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/static/css/site.css?v=4">
+<link rel="stylesheet" href="/static/css/site.css?v=5">
 ${themeVars(s)}
 ${pixelHead(s)}
 </head>
@@ -86,7 +85,6 @@ ${pixelHead(s)}
 ${body}
 <footer class="foot">
   <div class="wrap">
-    <p class="slogan xp">GreenCar, <span>só fica a pé quem quer.</span></p>
     <div>
       <p><strong>${esc(s.company_name || 'Greencar Multimarcas LTDA')}</strong></p>
       <p>CNPJ ${esc(s.company_cnpj || '62.645.418/0001-03')}</p>
@@ -144,8 +142,8 @@ function homePage({ cars, s, siteUrl }) {
   const body = `
 <main class="wrap">
   <section class="intro">
-    <h1 class="xp">${esc(s.home_title || 'Vem que a gente dá um jeito.')}</h1>
-    <p>${esc(s.home_subtitle || 'A gente acha a melhor opção pra você, financiado ou à vista. Escolha o seu carro, conte como quer pagar e a gente te chama no WhatsApp.')}</p>
+    <h1 class="xp">${s.home_title ? esc(s.home_title) : 'Escolha seu carro.<span>O resto a gente resolve.</span>'}</h1>
+    <p>${esc(s.home_subtitle || 'Veja preço, fotos e procedência de cada carro. Gostou de um? Conte como quer pagar e a gente te chama no WhatsApp.')}</p>
   </section>
   <div class="filters" role="group" aria-label="Filtrar carros">
     <button class="chip" type="button" data-band="all" aria-pressed="true">Todos</button>
