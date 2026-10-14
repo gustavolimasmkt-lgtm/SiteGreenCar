@@ -33,7 +33,7 @@ function shell({ title, active, body, s = {} }) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>${esc(title)} | Painel ${esc(s.store_name || 'GreenCar')}</title>
-<link rel="stylesheet" href="/static/css/admin.css?v=3">
+<link rel="stylesheet" href="/static/css/admin.css?v=4">
 </head>
 <body>
 <header class="bar">
@@ -51,7 +51,7 @@ function shell({ title, active, body, s = {} }) {
 function loginPage({ error, noPassword }) {
   return `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
 <title>Entrar | Painel GreenCar</title>
-<link rel="stylesheet" href="/static/css/admin.css?v=3"></head>
+<link rel="stylesheet" href="/static/css/admin.css?v=4"></head>
 <body class="login-body">
 <form class="login" method="post" action="/painel/login">
   <div class="logo big">Green<span>Car</span> <small>painel</small></div>
@@ -280,7 +280,7 @@ ${saved ? '<p class="okmsg">Configurações salvas.</p>' : ''}
       <div class="f"><label>CNPJ</label><input name="company_cnpj" value="${v('company_cnpj') || '62.645.418/0001-03'}"></div>
       <div class="f"><label>Contato para pedidos de privacidade</label><input name="privacy_contact" value="${v('privacy_contact')}" placeholder="e-mail ou WhatsApp"></div>
       <div class="f"><label>Endereço do site</label><input name="site_url" value="${v('site_url')}" placeholder="https://greencarsc.com.br"><small>Usado nos links das notificações.</small></div>
-      <div class="f span2"><label>Título da página inicial</label><input name="home_title" value="${v('home_title')}" placeholder="Carros à venda com preço e procedência na tela"></div>
+      <div class="f span2"><label>Título da página inicial</label><input name="home_title" value="${v('home_title')}" placeholder="Escolha seu carro. O resto a gente resolve."></div>
       <div class="f span2"><label>Texto de apoio</label><input name="home_subtitle" value="${v('home_subtitle')}"></div>
     </div>
     <label class="check"><input type="checkbox" name="indexar" value="1" ${s.indexar === '1' ? 'checked' : ''}> Deixar o Google indexar o site (desligado: só quem vem pelo anúncio encontra)</label>
