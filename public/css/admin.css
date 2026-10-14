@@ -1,11 +1,9 @@
-@font-face { font-family: 'Archivo'; src: url('/static/fonts/archivo.woff2') format('woff2'); font-weight: 100 900; font-stretch: 62% 125%; font-style: normal; font-display: swap; }
-
 :root {
   --green: #0E7A22; --green-2: #0A651B; --green-soft: #E3F5E5; --brand-ink: #101F22; --green-bright: #00BA17;
   --ink: #17201B; --muted: #5B6760; --line: #DCE2DD; --bg: #F2F4F1; --paper: #fff;
   --warn: #B54708; --warn-soft: #FEF0C7; --bad: #B42318; --bad-soft: #FEE4E2; --wa: #1C9E4D;
   --blue: #175CD3; --blue-soft: #D1E9FF;
-  --font: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', system-ui, 'Segoe UI', Roboto, sans-serif;
 }
 * { box-sizing: border-box; }
 body { margin: 0; font-family: var(--font); background: var(--bg); color: var(--ink); font-size: 15px; line-height: 1.45; }
