@@ -14,6 +14,36 @@ function themeVars(s) {
   return vars.length ? `<style>:root{${vars.join(';')}}</style>` : '';
 }
 
+const STORE_DEFAULT_ADDRESS = 'R. Quinze de Novembro, 88, Centro, Criciúma, SC';
+const storeAddress = (s) => s.store_address || STORE_DEFAULT_ADDRESS;
+const mapsUrl = (s) => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('GreenCar ' + storeAddress(s));
+
+const BENEFITS = [
+  ['Financiamento', 'com as melhores taxas'],
+  ['Avaliação justa', 'do seu carro na troca'],
+  ['Consultoria', 'para achar o carro ideal'],
+  ['Suporte completo', 'depois da venda']
+];
+
+function benefitsBlock() {
+  return `<div class="benefits">
+    <h2 class="xp">Muito além de vender carros.</h2>
+    <ul>${BENEFITS.map(([b, t]) => `<li><strong>${b}</strong> ${t}</li>`).join('')}</ul>
+    <p class="mission">Nossa missão é facilitar a sua vida e garantir que você saia daqui com a melhor decisão possível.</p>
+  </div>`;
+}
+
+function storeBlock(s, compact) {
+  return `<div class="store${compact ? ' compact' : ''}">
+    <img src="/static/img/loja.jpg" alt="Fachada da loja GreenCar no Centro de Criciúma" loading="lazy" width="870" height="541">
+    <div class="store-text">
+      <h2 class="xp">${compact ? 'Veja o carro na loja' : 'É fácil chegar na GreenCar.'}</h2>
+      <p>${esc(storeAddress(s))}${s.store_hours ? `<br>${esc(s.store_hours)}` : ''}</p>
+      <a href="${esc(mapsUrl(s))}" target="_blank" rel="noopener">Abrir no mapa</a>
+    </div>
+  </div>`;
+}
+
 function pixelHead(s) {
   if (!s.pixel_id) return '';
   const id = esc(s.pixel_id.replace(/\D/g, ''));
@@ -42,7 +72,7 @@ ${ogImage ? `<meta property="og:image" content="${esc(ogImage)}">` : ''}
 ${canonical ? `<link rel="canonical" href="${esc(canonical)}">` : ''}
 <meta name="theme-color" content="#ffffff">
 <link rel="preload" href="/static/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/static/css/site.css?v=3">
+<link rel="stylesheet" href="/static/css/site.css?v=4">
 ${themeVars(s)}
 ${pixelHead(s)}
 </head>
@@ -56,10 +86,11 @@ ${pixelHead(s)}
 ${body}
 <footer class="foot">
   <div class="wrap">
+    <p class="slogan xp">GreenCar, <span>só fica a pé quem quer.</span></p>
     <div>
       <p><strong>${esc(s.company_name || 'Greencar Multimarcas LTDA')}</strong></p>
       <p>CNPJ ${esc(s.company_cnpj || '62.645.418/0001-03')}</p>
-      ${s.store_address ? `<p>${esc(s.store_address)}</p>` : ''}
+      <p>${esc(storeAddress(s))}</p>
     </div>
     <div>
       ${s.store_instagram ? `<p><a href="https://instagram.com/${esc(s.store_instagram.replace(/^@/, ''))}" target="_blank" rel="noopener">@${esc(s.store_instagram.replace(/^@/, ''))}</a></p>` : ''}
@@ -113,8 +144,8 @@ function homePage({ cars, s, siteUrl }) {
   const body = `
 <main class="wrap">
   <section class="intro">
-    <h1 class="xp">${esc(s.home_title || 'Carros à venda com preço e procedência na tela')}</h1>
-    <p>${esc(s.home_subtitle || 'Veja fotos, ficha completa e histórico de cada carro. Gostou de um? Conte como pretende pagar e a gente te chama no WhatsApp.')}</p>
+    <h1 class="xp">${esc(s.home_title || 'Vem que a gente dá um jeito.')}</h1>
+    <p>${esc(s.home_subtitle || 'A gente acha a melhor opção pra você, financiado ou à vista. Escolha o seu carro, conte como quer pagar e a gente te chama no WhatsApp.')}</p>
   </section>
   <div class="filters" role="group" aria-label="Filtrar carros">
     <button class="chip" type="button" data-band="all" aria-pressed="true">Todos</button>
@@ -136,6 +167,10 @@ function homePage({ cars, s, siteUrl }) {
     ${cars.length ? cars.map(carCard).join('') : '<p class="empty">Nenhum carro disponível no momento. Volte em breve.</p>'}
     <p class="empty" id="f-empty" hidden>Nenhum carro nessa faixa. Tente outro filtro.</p>
   </div>
+  <section class="about">
+    ${benefitsBlock()}
+    ${storeBlock(s, false)}
+  </section>
 </main>`;
   return layout({
     title: `${s.store_name || 'GreenCar'} | Carros à venda em ${s.store_city || 'Criciúma, SC'}`,
@@ -307,6 +342,7 @@ function carPage({ car: c, photos, others, s, siteUrl, waNumber }) {
       ${proof}
       ${opcionais.length ? `<section class="section"><h2>Opcionais</h2><ul class="optionals">${opcionais.map(o => `<li>${esc(o)}</li>`).join('')}</ul></section>` : ''}
       ${c.descricao ? `<section class="section"><h2>Sobre o carro</h2><p class="desc">${esc(c.descricao)}</p></section>` : ''}
+      <section class="section">${storeBlock(s, true)}</section>
     </div>
     <aside class="car-side">
       ${sticker}
