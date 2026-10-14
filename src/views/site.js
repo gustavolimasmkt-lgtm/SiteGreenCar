@@ -286,15 +286,16 @@ function carPage({ car: c, photos, others, s, siteUrl, waNumber }) {
   ${photos.length > 1 ? `<div class="thumbs" id="g-thumbs">${photos.map((p, i) => `<button type="button" data-i="${i}" aria-label="Ver foto ${i + 1}" ${i ? '' : 'aria-current="true"'}><img src="${esc(p.thumb)}" alt="" loading="lazy"></button>`).join('')}</div>` : ''}
 </div>` : '<div class="gallery-wrap"><div class="gallery" style="aspect-ratio:4/3"></div></div>';
 
-  const proof = `
+  const proofItems = [
+    c.unico_dono ? `<div class="proof-item"><span class="ic">✓</span><div><strong>Único dono</strong></div></div>` : '',
+    (c.laudo_aprovado || c.laudo_texto) ? `<div class="proof-item"><span class="ic">✓</span><div><strong>${c.laudo_aprovado ? 'Laudo cautelar aprovado' : 'Laudo cautelar'}</strong>${c.laudo_texto ? `<p>${esc(c.laudo_texto)}</p>` : ''}</div></div>` : '',
+    c.revisoes ? `<div class="proof-item"><span class="ic">✓</span><div><strong>Revisões</strong><p>${esc(c.revisoes)}</p></div></div>` : ''
+  ].filter(Boolean);
+  const proof = proofItems.length ? `
 <section class="section">
   <h2>Procedência</h2>
-  <div class="proof">
-    <div class="proof-item ${c.unico_dono ? '' : 'no'}"><span class="ic">${c.unico_dono ? '✓' : '·'}</span><div><strong>${c.unico_dono ? 'Único dono' : 'Mais de um dono'}</strong></div></div>
-    <div class="proof-item ${c.laudo_aprovado ? '' : 'no'}"><span class="ic">${c.laudo_aprovado ? '✓' : '·'}</span><div><strong>${c.laudo_aprovado ? 'Laudo cautelar aprovado' : 'Laudo cautelar'}</strong>${c.laudo_texto ? `<p>${esc(c.laudo_texto)}</p>` : (c.laudo_aprovado ? '' : '<p>Consulte o laudo com a gente.</p>')}</div></div>
-    ${c.revisoes ? `<div class="proof-item"><span class="ic">✓</span><div><strong>Revisões</strong><p>${esc(c.revisoes)}</p></div></div>` : ''}
-  </div>
-</section>`;
+  <div class="proof">${proofItems.join('')}</div>
+</section>` : '';
 
   const badges = [
     c.status === 'reservado' ? '<span class="reserved">Reservado</span>' : '',
