@@ -5,7 +5,7 @@ const { brl, phoneDisplay, PAGAMENTO, PRAZO } = require('./util');
 
 function evoConfig() {
   return {
-    url: (getSetting('evo_url', process.env.EVOLUTION_URL || '')).replace(/\/+$/, ''),
+    url: (() => { let u = (getSetting('evo_url', process.env.EVOLUTION_URL || '')).trim().replace(/\/+$/, ''); if (u && !/^https?:\/\//i.test(u)) u = 'https://' + u; return u; })(),
     key: getSetting('evo_key', process.env.EVOLUTION_API_KEY || ''),
     instance: getSetting('evo_instance', 'greencar-leads'),
     to: getSetting('notify_number', '')
