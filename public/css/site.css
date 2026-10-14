@@ -280,3 +280,37 @@ fieldset.field { border: 0; margin: 0 0 14px; padding: 0; min-width: 0; }
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; transition: none !important; }
 }
+
+/* Benefícios e loja */
+.about { display: grid; grid-template-columns: 1fr 1.1fr; gap: 20px; padding: 8px 0 56px; align-items: stretch; }
+.benefits { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 26px; }
+.benefits h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); line-height: 1.1; margin: 0 0 14px; max-width: 16ch; }
+.benefits ul { list-style: none; margin: 0; padding: 0; }
+.benefits li { padding: 13px 0 13px 22px; border-top: 1px solid var(--line); position: relative; color: var(--muted); }
+.benefits li::before { content: ''; position: absolute; left: 0; top: 20px; width: 9px; height: 9px; border-radius: 2px; background: var(--green-bright); }
+.benefits { display: flex; flex-direction: column; }
+.mission { margin: auto 0 0; padding: 14px 0 0 16px; border-left: 4px solid var(--green-bright); font-weight: 600; font-size: 1.05rem; line-height: 1.4; max-width: 46ch; }
+.benefits ul { margin-bottom: 20px; }
+.benefits li strong { color: var(--ink); font-weight: 700; }
+.store { background: var(--brand-ink); color: #fff; border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; }
+.store img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+.store-text { padding: 20px 24px 24px; border-top: 4px solid var(--green-bright); }
+.store-text h2 { font-size: 1.35rem; margin: 0 0 6px; }
+.store-text p { margin: 0 0 12px; color: #C9D3D5; }
+.store-text a { color: var(--green-bright); font-weight: 700; }
+.store.compact { background: none; color: var(--ink); flex-direction: row; gap: 18px; align-items: center; border-radius: 0; }
+.store.compact img { width: 200px; flex: none; border-radius: var(--radius-sm); }
+.store.compact .store-text { padding: 0; border: 0; }
+.store.compact .store-text h2 { font-size: 1.15rem; }
+.store.compact .store-text p { color: var(--muted); }
+.store.compact .store-text a { color: var(--green); }
+.foot .wrap { align-items: flex-start; }
+.foot .slogan { flex-basis: 100%; margin: 0 0 8px; font-size: 1.25rem; color: #fff; }
+.foot .slogan span { color: var(--green-bright); }
+@media (max-width: 860px) {
+  .about { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .store.compact { flex-direction: column; align-items: stretch; }
+  .store.compact img { width: 100%; }
+}
