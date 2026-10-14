@@ -1,7 +1,5 @@
-@font-face { font-family: 'Archivo'; src: url('/static/fonts/archivo.woff2') format('woff2'); font-weight: 100 900; font-stretch: 62% 125%; font-style: normal; font-display: swap; }
-
 /* GreenCar | site público
-   Identidade provisória: verde garrafa + tinta, tipografia Archivo com eixo de largura.
+   Identidade: verde GreenCar + grafite, fonte do sistema (SF Pro no Apple).
    O elemento de destaque é a "etiqueta de para-brisa" com ano, km e preço. */
 
 :root {
@@ -21,7 +19,7 @@
   --radius-lg: 14px;
   --radius-sm: 8px;
   --wrap: 1180px;
-  --font: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', system-ui, 'Segoe UI', Roboto, sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -42,7 +40,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* Tipografia expandida para nomes de carro e preços */
-.xp { font-stretch: 118%; font-weight: 800; letter-spacing: -0.01em; }
+.xp { font-weight: 800; letter-spacing: -0.025em; }
 
 /* Cabeçalho */
 .top { background: var(--paper); color: var(--ink); border-bottom: 3px solid var(--green-bright); }
@@ -55,8 +53,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* Listagem */
 .intro { padding: 32px 0 8px; }
-.intro h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.1; margin: 0 0 8px; max-width: 22ch; }
-.intro p { margin: 0; color: var(--muted); max-width: 60ch; }
+.intro h1 { font-size: clamp(2rem, 4.6vw, 3.1rem); line-height: 1.03; letter-spacing: -0.035em; margin: 0 0 12px; max-width: 16ch; }
+.intro h1 span { display: block; color: var(--green); }
+.intro p { margin: 0; color: var(--muted); max-width: 54ch; font-size: 1.05rem; }
 
 .filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 20px 0; }
 .chip {
@@ -305,8 +304,6 @@ fieldset.field { border: 0; margin: 0 0 14px; padding: 0; min-width: 0; }
 .store.compact .store-text p { color: var(--muted); }
 .store.compact .store-text a { color: var(--green); }
 .foot .wrap { align-items: flex-start; }
-.foot .slogan { flex-basis: 100%; margin: 0 0 8px; font-size: 1.25rem; color: #fff; }
-.foot .slogan span { color: var(--green-bright); }
 @media (max-width: 860px) {
   .about { grid-template-columns: 1fr; }
 }
