@@ -61,6 +61,7 @@ function layout({ title, description = '', ogImage = '', canonical = '', body, s
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");oaiq("init",{pixelId:"7KXinbK13rb2ggHfNP539o",debug:true});</script>
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 ${noindex}
