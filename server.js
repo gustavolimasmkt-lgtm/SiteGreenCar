@@ -9,6 +9,7 @@ const { db, UPLOAD_DIR, getSetting, setSetting, allSettings } = require('./src/d
 const util = require('./src/util');
 const auth = require('./src/auth');
 const meta = require('./src/meta');
+const openai = require('./src/openai');
 const notify = require('./src/notify');
 const siteViews = require('./src/views/site');
 const adminViews = require('./src/views/admin');
@@ -163,6 +164,8 @@ app.post('/api/leads', async (req, res) => {
     customData: { content_ids: [String(car.id)], content_type: 'vehicle', content_name: lead.car_label, value: car.preco, currency: 'BRL' },
     leadId: lead.id
   }).catch(e => console.error('[meta]', e));
+  openai.sendOpenAIEvent({ type: 'lead_created', eventId, sourceUrl: lead.page_url })
+    .catch(e => console.error('[openai]', e.message));
 });
 
 app.post('/api/track', express.text({ type: 'text/plain' }), (req, res) => {
@@ -407,11 +410,11 @@ const SETTING_KEYS = [
   'store_name', 'store_city', 'store_address', 'store_hours', 'store_instagram', 'wa_number', 'privacy_contact',
   'company_name', 'company_cnpj', 'site_url', 'indexar', 'home_title', 'home_subtitle',
   'color_primary', 'color_soft',
-  'pixel_id', 'capi_token', 'test_event_code', 'graph_version',
+  'pixel_id', 'capi_token', 'test_event_code', 'graph_version', 'openai_capi_key',
   'evo_url', 'evo_key', 'evo_instance', 'notify_number',
   'smtp_host', 'smtp_port', 'smtp_user', 'smtp_pass', 'notify_email'
 ];
-const SECRET_KEYS = ['capi_token', 'evo_key', 'smtp_pass'];
+const SECRET_KEYS = ['capi_token', 'openai_capi_key', 'evo_key', 'smtp_pass'];
 
 admin.get('/config', (req, res) => res.send(adminViews.configPage({ s: allSettings(), saved: req.query.ok === '1', siteUrl: siteUrl(req) })));
 

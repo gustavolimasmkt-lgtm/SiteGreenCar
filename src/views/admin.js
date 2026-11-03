@@ -305,6 +305,7 @@ ${saved ? '<p class="okmsg">Configurações salvas.</p>' : ''}
       <div class="f"><label>Token da API de Conversões</label><input name="capi_token" value="${secret('capi_token')}" type="password" autocomplete="off"><small>Gerado em Gerenciador de Eventos, Configurações, API de Conversões.</small></div>
       <div class="f"><label>Código de evento de teste</label><input name="test_event_code" value="${v('test_event_code')}" placeholder="TEST12345"><small>Use só para testar. Apague antes de rodar a campanha.</small></div>
       <div class="f"><label>Versão da Graph API</label><input name="graph_version" value="${v('graph_version')}" placeholder="v23.0"></div>
+      <div class="f"><label>Chave da Conversions API da OpenAI</label><input name="openai_capi_key" value="${secret('openai_capi_key')}" type="password" autocomplete="off"><small>Para o evento de lead dos anúncios do ChatGPT. Sem a chave, só o pixel do navegador envia.</small></div>
     </div>
     <button type="button" class="btn ghost" data-action="meta-test">Enviar evento de teste</button>
     <div class="help">

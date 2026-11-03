@@ -224,6 +224,7 @@
       return r.json().then(function (j) { return { ok: r.ok, j: j }; });
     }).then(function (res) {
       if (!res.ok) throw new Error(res.j && res.j.error || 'Não foi possível enviar.');
+      try { if (window.oaiq) window.oaiq('measure', 'lead_created', { type: 'customer_action' }, { event_id: eventId }); } catch (e) {}
       fbqSafe('track', 'Lead', { content_ids: [carId], content_type: 'vehicle', content_name: car.dataset.carLabel, value: price, currency: 'BRL' }, { eventID: eventId });
       var tpl = document.getElementById('tpl-done');
       var node = tpl.content.firstElementChild.cloneNode(true);

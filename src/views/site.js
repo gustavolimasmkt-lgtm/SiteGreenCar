@@ -97,7 +97,7 @@ ${body}
     </div>
   </div>
 </footer>
-<script src="/static/js/site.js?v=3" defer></script>
+<script src="/static/js/site.js?v=4" defer></script>
 </body>
 </html>`;
 }
